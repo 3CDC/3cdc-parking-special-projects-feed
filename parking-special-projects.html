@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>Parking Special Projects</title>
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --surface:#ffffff;
+      --surface-2:#f8fafc;
+      --text:#0f172a;
+      --muted:#64748b;
+      --border:#e2e8f0;
+      --accent:#2563eb;
+      --accent-2:#1d4ed8;
+      --success:#15803d;
+      --warning:#b45309;
+      --danger:#b91c1c;
+      --shadow:0 10px 30px rgba(15,23,42,.08);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    .app{
+      width:min(780px,100%);
+      margin:0 auto;
+      min-height:100vh;
+      background:var(--bg);
+    }
+
+    .topbar{
+      background:#0f172a;
+      color:#fff;
+      padding:20px 18px 22px;
+      position:sticky;
+      top:0;
+      z-index:5;
+      box-shadow:0 8px 22px rgba(15,23,42,.18);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand-mark{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .logo{
+      min-width:94px;
+      height:54px;
+      border-radius:14px;
+      background:#ffffff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:0;
+      font-weight:900;
+      font-size:28px;
+      line-height:1;
+      letter-spacing:-0.06em;
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 8px 18px rgba(15,23,42,.18);
+      flex:0 0 auto;
+      padding:0 10px;
+    }
+
+    .logo span{
+      display:inline-block;
+      font-weight:900;
+      font-family:Arial, Helvetica, sans-serif;
+      transform:scaleY(1.08);
+    }
+
+    .logo-3{color:#e11d48;}
+    .logo-c1{color:#b5b61b;}
+    .logo-c2{color:#4f80cf;}
+    .logo-c3{color:#9ca3af;}
+
+    .eyebrow{
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-size:11px;
+      font-weight:800;
+      color:#cbd5e1;
+      margin-bottom:4px;
+    }
+
+    h1{
+      margin:0;
+      font-size:22px;
+      line-height:1.15;
+      font-weight:800;
+      overflow-wrap:anywhere;
+    }
+
+    .refresh{
+      border:1px solid rgba(255,255,255,.2);
+      background:rgba(255,255,255,.08);
+      color:white;
+      border-radius:12px;
+      min-width:44px;
+      min-height:44px;
+      padding:0 12px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    main{padding:18px}
+
+    .summary{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:var(--shadow);
+      margin-bottom:16px;
+    }
+
+    .summary-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+    }
+
+    .garage-name{
+      font-size:20px;
+      font-weight:800;
+      margin:0 0 4px;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    .count{
+      flex:0 0 auto;
+      border-radius:16px;
+      background:#eff6ff;
+      color:#1d4ed8;
+      padding:10px 12px;
+      text-align:center;
+      min-width:76px;
+    }
+
+    .count strong{
+      display:block;
+      font-size:24px;
+      line-height:1;
+    }
+
+    .count span{
+      display:block;
+      margin-top:5px;
+      font-size:11px;
+      text-transform:uppercase;
+      font-weight:800;
+      letter-spacing:.08em;
+    }
+
+    .section-title{
+      font-size:13px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      color:#475569;
+      margin:22px 2px 10px;
+    }
+
+    .tasks{
+      display:grid;
+      gap:14px;
+    }
+
+    .task{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:17px;
+      box-shadow:var(--shadow);
+    }
+
+    .task-head{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+    }
+
+    .task-title{
+      margin:0;
+      font-size:18px;
+      font-weight:850;
+      line-height:1.25;
+    }
+
+    .task-id{
+      margin-top:5px;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .pill{
+      flex:0 0 auto;
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:11px;
+      font-weight:850;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      border:1px solid transparent;
+    }
+
+    .p-normal{background:#f8fafc;border-color:#cbd5e1;color:#475569}
+    .p-high{background:#fff7ed;border-color:#fdba74;color:#9a3412}
+    .p-urgent{background:#fef2f2;border-color:#fca5a5;color:#991b1b}
+
+    .meta{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin:16px 0;
+    }
+
+    .meta-box{
+      border:1px solid var(--border);
+      border-radius:13px;
+      background:var(--surface-2);
+      padding:11px 12px;
+      min-width:0;
+    }
+
+    .meta-label{
+      display:block;
+      color:var(--muted);
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-weight:850;
+      margin-bottom:4px;
+    }
+
+    .meta-value{
+      font-size:13px;
+      font-weight:750;
+      overflow-wrap:anywhere;
+    }
+
+    .instructions{
+      background:#f8fafc;
+      border-left:4px solid #94a3b8;
+      border-radius:10px;
+      padding:12px 13px;
+      margin:0 0 16px;
+      color:#334155;
+      font-size:14px;
+      line-height:1.5;
+      white-space:pre-wrap;
+      overflow-wrap:anywhere;
+    }
+
+    .complete{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      min-height:50px;
+      border:0;
+      border-radius:14px;
+      background:var(--accent);
+      color:white;
+      text-decoration:none;
+      font-weight:850;
+      font-size:15px;
+      cursor:pointer;
+      transition:background .15s ease;
+    }
+
+    .complete:hover{background:var(--accent-2)}
+    .complete:focus-visible,.refresh:focus-visible{
+      outline:3px solid rgba(59,130,246,.4);
+      outline-offset:2px;
+    }
+
+    .state{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:28px 20px;
+      text-align:center;
+      box-shadow:var(--shadow);
+    }
+
+    .state-icon{
+      width:52px;
+      height:52px;
+      border-radius:16px;
+      margin:0 auto 12px;
+      display:grid;
+      place-items:center;
+      background:#f1f5f9;
+      font-size:24px;
+    }
+
+    .state h2{font-size:18px;margin:0 0 7px}
+    .state p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+
+    .footer{
+      color:#94a3b8;
+      text-align:center;
+      font-size:11px;
+      padding:24px 18px 34px;
+    }
+
+    @media (max-width:480px){
+      .topbar{padding:16px}
+      main{padding:14px}
+      .summary-row{align-items:center}
+      .garage-name{font-size:18px}
+      .meta{grid-template-columns:1fr}
+      .task{padding:15px}
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">
+        <div class="logo" aria-hidden="true">
+          <span class="logo-3">3</span><span class="logo-c1">C</span><span class="logo-c2">D</span><span class="logo-c3">C</span>
+        </div>
+        <div>
+          <div class="eyebrow">Parking Operations</div>
+          <h1>Special Projects</h1>
+        </div>
+      </div>
+      <button id="refreshBtn" class="refresh" type="button" aria-label="Refresh tasks">Refresh</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="summary">
+      <div class="summary-row">
+        <div>
+          <p id="garageName" class="garage-name">Loading garage…</p>
+          <p id="garageSub" class="sub">Checking current Special Projects assignments.</p>
+        </div>
+        <div class="count" aria-live="polite">
+          <strong id="taskCount">—</strong>
+          <span>Open Tasks</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-title">Current Assignments</div>
+    <div id="taskList" class="tasks" aria-live="polite">
+      <div class="state">
+        <div class="state-icon">↻</div>
+        <h2>Loading tasks</h2>
+        <p>Please wait while the current assignments are loaded.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">3CDC Parking Special Projects • Mobile Task Access</footer>
+</div>
+
+<script>
+(() => {
+  const FEED_URL = 'https://raw.githubusercontent.com/3CDC/3cdc-parking-special-projects-feed/main/parking_special_projects_tasks.json';
+
+  const GARAGES = {
+    'washington-park': 'Washington Park Garage',
+    'mercer': 'Mercer Garage',
+    'ziegler-park': 'Ziegler Park Garage',
+    'court-walnut': 'Court & Walnut Garage',
+    '8th-sycamore': '8th & Sycamore Garage',
+    'fountain-square': 'Fountain Square Garage',
+    '4th-race': '4th & Race Garage',
+    '5th-race': '5th & Race Garage',
+    'whex': 'Whex Garage'
+  };
+
+  const ACTIVE_STATUSES = new Set(['New','Assigned','In Progress','Needs Correction']);
+
+  const garageNameEl = document.getElementById('garageName');
+  const garageSubEl = document.getElementById('garageSub');
+  const taskCountEl = document.getElementById('taskCount');
+  const taskListEl = document.getElementById('taskList');
+  const refreshBtn = document.getElementById('refreshBtn');
+
+  const params = new URLSearchParams(window.location.search);
+  const garageKey = (params.get('garage') || '').trim().toLowerCase();
+  const garageName = GARAGES[garageKey];
+
+  function escapeHtml(value){
+    return String(value ?? '')
+      .replaceAll('&','&amp;')
+      .replaceAll('<','&lt;')
+      .replaceAll('>','&gt;')
+      .replaceAll('"','&quot;')
+      .replaceAll("'","&#039;");
+  }
+
+  function formatDate(value){
+    if (!value) return 'No due date';
+    const parts = String(value).split('-').map(Number);
+    if (parts.length !== 3 || parts.some(Number.isNaN)) return escapeHtml(value);
+    const d = new Date(Date.UTC(parts[0], parts[1]-1, parts[2]));
+    return new Intl.DateTimeFormat('en-US', {
+      month:'short',
+      day:'numeric',
+      year:'numeric',
+      timeZone:'UTC'
+    }).format(d);
+  }
+
+  function priorityClass(priority){
+    const p = String(priority || 'Normal').toLowerCase();
+    if (p === 'urgent') return 'p-urgent';
+    if (p === 'high') return 'p-high';
+    return 'p-normal';
+  }
+
+  function showState(icon, title, message){
+    taskListEl.innerHTML = `
+      <div class="state">
+        <div class="state-icon">${escapeHtml(icon)}</div>
+        <h2>${escapeHtml(title)}</h2>
+        <p>${escapeHtml(message)}</p>
+      </div>`;
+  }
+
+  function renderTasks(tasks){
+    taskCountEl.textContent = String(tasks.length);
+
+    if (!tasks.length){
+      garageSubEl.textContent = 'There are no active Special Projects assignments for this location.';
+      showState('✓','No open tasks','There is currently no Special Projects work waiting at this garage.');
+      return;
+    }
+
+    garageSubEl.textContent = 'Select an assignment below to review and submit completed work.';
+
+    taskListEl.innerHTML = tasks.map(task => {
+      const title = escapeHtml(task.taskType || 'Special Project');
+      const id = escapeHtml(task.taskId || '');
+      const priority = escapeHtml(task.priority || 'Normal');
+      const status = escapeHtml(task.status || 'New');
+      const instructions = escapeHtml(task.instructions || 'Follow the assigned work requirements.');
+      const due = formatDate(task.dueDate);
+      const link = String(task.completionLink || '');
+
+      return `
+        <article class="task">
+          <div class="task-head">
+            <div>
+              <h2 class="task-title">${title}</h2>
+              <div class="task-id">${id}</div>
+            </div>
+            <span class="pill ${priorityClass(task.priority)}">${priority}</span>
+          </div>
+
+          <div class="meta">
+            <div class="meta-box">
+              <span class="meta-label">Status</span>
+              <span class="meta-value">${status}</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">Due</span>
+              <span class="meta-value">${due}</span>
+            </div>
+          </div>
+
+          <p class="instructions">${instructions}</p>
+
+          ${link
+            ? `<a class="complete" href="${escapeHtml(link)}">Complete Task</a>`
+            : `<button class="complete" type="button" disabled>Completion Link Unavailable</button>`
+          }
+        </article>`;
+    }).join('');
+  }
+
+  async function loadTasks(){
+    if (!garageName){
+      garageNameEl.textContent = 'Garage not recognized';
+      garageSubEl.textContent = 'This QR link does not contain a valid garage identifier.';
+      taskCountEl.textContent = '0';
+      showState('!','Invalid garage link','Please scan the QR code posted at the garage again.');
+      return;
+    }
+
+    garageNameEl.textContent = garageName;
+    garageSubEl.textContent = 'Checking current Special Projects assignments.';
+    taskCountEl.textContent = '—';
+    showState('↻','Loading tasks','Please wait while the current assignments are loaded.');
+
+    try{
+      const url = new URL(FEED_URL);
+      url.searchParams.set('_', Date.now().toString());
+
+      const response = await fetch(url.toString(), { cache:'no-store' });
+      if (!response.ok) throw new Error(`Feed returned HTTP ${response.status}`);
+
+      const data = await response.json();
+      if (!Array.isArray(data)) throw new Error('Task feed is not an array.');
+
+      const tasks = data
+        .filter(task =>
+          task &&
+          task.property === garageName &&
+          ACTIVE_STATUSES.has(String(task.status || '')) &&
+          task.taskId &&
+          task.completionLink
+        )
+        .sort((a,b) => {
+          const aDue = a.dueDate || '9999-12-31';
+          const bDue = b.dueDate || '9999-12-31';
+          if (aDue !== bDue) return aDue.localeCompare(bDue);
+
+          const rank = {Urgent:0, High:1, Normal:2};
+          return (rank[a.priority] ?? 3) - (rank[b.priority] ?? 3);
+        });
+
+      renderTasks(tasks);
+    }catch(error){
+      console.error(error);
+      taskCountEl.textContent = '—';
+      garageSubEl.textContent = 'The current task feed could not be loaded.';
+      showState('!','Unable to load tasks','Please try again in a moment or contact Parking management if the problem continues.');
+    }
+  }
+
+  refreshBtn.addEventListener('click', loadTasks);
+  loadTasks();
+})();
+</script>
+</body>
+</html>
